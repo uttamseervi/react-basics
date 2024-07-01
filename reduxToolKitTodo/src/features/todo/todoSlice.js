@@ -6,8 +6,11 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 const initialState = {
     todos: [{ id: 1, text: "this is the first todo" }]
 }
+
+// slice banane keliye we need three things one is name state and the reducers ki poori list
 export const todoSlice = createSlice({
     name: 'todo',
+    // state:initialState,
     initialState,
     reducers: {
         /*
@@ -41,5 +44,5 @@ we should give the awareness to store about the reducers so that the store can o
 export default todoSlice.reducer
 /*
 we cannot export the todoSlice directly we need to do it in steps 
-we need to export it in 2 parts one : are the functionalities of the slice and another one is the slice this is the syntax so remember it 
+we need to export it in 2 parts one : are the functionalities of the slice and another one is the group od all the reducers this is the syntax so remember it 
 */
