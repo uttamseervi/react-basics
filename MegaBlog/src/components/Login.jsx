@@ -15,6 +15,7 @@ const Login = () => {
     const [error, setError] = useState('')
 
     const login = async (data) => {
+        // the data here is coming from  what we have spread in the register so remember this
         setError("")
         try {
             const session = await authService.login(data);
@@ -60,7 +61,9 @@ const Login = () => {
                             placeholder="Enter your Email"
                             type="email"
                             // {...register} 
-                            /*The above line is the syntax for using the react from if we dont write this agar kisi or input me bhi ye register use karte hai to uski value overWrite hojayegi*/
+                            /*The above line is the syntax for using the react from if we dont write this agar kisi or input me bhi ye register use karte hai to uski value overWrite hojayegi
+                            hame isko spread karna padega agar nhi kiya to like ham kisi or input me bhi register use karte hai to uski value overWrite hojati hai
+                            */
                             {...register("email", {
                                 required: true,
                                 validate: {
@@ -78,12 +81,7 @@ const Login = () => {
                                 // maxLength: 8,
                             })}
                         />
-                        <Button
-                            className="w-full"
-                            type="submit"
-                        >
-                            Signin
-                        </Button>
+                        <Button type="submit" className='w-full' >Sign in</Button>
                     </div>
                 </form>
             </div>
