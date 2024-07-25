@@ -18,16 +18,17 @@ const EditPost = () => {
         }
     }, [slug, navigate])
 
-    post ? (
-        <div>
-            <Container>
-                <PostForm post={post} />
-            </Container>
-        </div>
-    ) : null
-    return (
-        <div>
 
+    return (
+        <div>{
+            post ? (
+                <div>
+                    <Container>
+                        <PostForm post={post} />
+                    </Container>
+                </div>
+            ) : null
+        }
         </div>
     )
 }

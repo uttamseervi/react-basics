@@ -18,6 +18,7 @@ function PostForm({ post }) {
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData)
     console.log(userData)
+    console.log("The user id is", userData.userData.$id)
 
     const submit = async (data) => {
         if (post) {
@@ -41,27 +42,27 @@ function PostForm({ post }) {
                 data.featuredImage = fileId
                 const dbPost = await appwriteService.createPost({
                     ...data,
-                    userId: userData.$id,
+                    userId: userData.userData.$id,
                 })
-                if (dbPost) {
-                    navigate(`/post/${dbPost.$id}`)
-                }
+                console.log("THe post is created successfully ", dbPost)
+
+                if (dbPost) { navigate(`/post/${dbPost.$id}`) }
+
             }
         }
     }
     const slugTransform = useCallback((value) => {
         if (value && typeof value === 'string') {
-            /*   const slug = value.toLowerCase().replace(/ /g, '-')
-            setValue('slug', slug)
-            return slug*/
             return value
                 .trim()
                 .toLowerCase()
-                .replace(/^[a-zA-Z\d\s]+/g, '-')
-                .replace(/\s/g, '-')
+                .replace(/[^\w\s-]/g, '')   // Remove non-alphanumeric characters except spaces and hyphens
+                .replace(/\s+/g, '-')       // Replace spaces with hyphens
+                .replace(/-+/g, '-')        // Replace multiple hyphens with a single hyphen
+                .replace(/^-|-$/g, '');     // Remove leading and trailing hyphens
         }
-        return ""
-    }, [])
+        return "";
+    }, []);
 
     useEffect(() => {
         const subscription = watch((value, { name }) => {
