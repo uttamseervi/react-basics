@@ -11,11 +11,14 @@ const Signup = () => {
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState('');
+    const[loading,setLoading]=useState(false)
 
     const create = async (data) => {
+        console.log("The signup data is  :-->>",data)
         setError("");
         try {
             const session = await authService.createAccount(data)
+            console.log("the session from the signup is: ", session)
             if (session) {
                 const userData = await authService.getCurrentUser();
                 if (userData) dispatch(login(userData));

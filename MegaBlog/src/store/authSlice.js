@@ -10,14 +10,14 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         login: (state, action) => {
-            state.status = true,
-                // state.userData = action.payload.userData
-                state.userData = action.payload
+            state.isAuthenticated = true
+            state.userData = action.payload
+            // state.userData = action.payload.userData
             /* in redux we don't need to spread the values unlike context api*/
         },
         logout: (state, action) => {
-            state.status = false,
-                state.userData = null
+            state.isAuthenticated = false
+            state.userData = null
         }
     }
 })
