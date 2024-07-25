@@ -3,9 +3,11 @@ import { Container, Logo, LogoutBtn } from '../index'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
 function Header() {
-    const authStatus = useSelector((state) => state.auth.status)
-    const navigate = useNavigate();
+    const authStatus = useSelector((state) => state.auth?.isAuthenticated)
+    const navigate = useNavigate()
+
     const navItems = [
         {
             name: 'Home',
@@ -18,7 +20,7 @@ function Header() {
             active: !authStatus,
         },
         {
-            name: "Signup",
+            name: "Sign up",
             slug: "/signup",
             active: !authStatus,
         },
@@ -32,11 +34,7 @@ function Header() {
             slug: "/add-post",
             active: authStatus,
         },
-    ];
-
-
-
-
+    ]
 
 
     return (
